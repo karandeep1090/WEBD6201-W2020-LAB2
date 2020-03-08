@@ -1,6 +1,6 @@
-class Contact
+class contact
 {
-    constructor(contactName = "", emailAddress = "", contactNumber = "", contactMessage = "")
+    constructor(contactName="", emailAddress="", contactNumber="", contactMessage="")
     {
         this.contactName = contactName;
         this.emailAddress = emailAddress;
@@ -9,6 +9,18 @@ class Contact
     }
 }
 
+class User
+{
+    constructor(firstName = "",lastName="", userName="",  emailAddress = "", password = "")
+    {
+        this.FirstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.emailAddress = emailAddress;
+        this.password = password;
+        
+    }
+}
 
 
 
@@ -22,7 +34,7 @@ let app;
     // Declare Function Variables here...
     console.log("%cDeclaring Variables", "color: red;")
     let contactObject = new Contact();
-
+    let UserObject = new User();
     /**
      * Variable initialization in this function
      *
@@ -328,7 +340,7 @@ let app;
             $("#lastName").select();
          });
 
-         
+
          //  Register Email  validation Events
         $("#emailAddress").blur((e)=>
         {
@@ -377,6 +389,28 @@ let app;
             }
 
 
+            
+            let firstName = $("#FirstName").val();
+            let lastName = $("#lastName").val();
+            let userName = $("#userName").val();
+            let emailAddress = $("#emailAddress").val();
+            let password = $("#password").val();
+            
+
+            console.log(`First Name: ${firstName}`);
+            console.log(`Last Name: ${lastName}`);
+            console.log(`User Name: ${userName}`);
+            console.log(`Email Address: ${emailAddress}`);
+            console.log(`Password: ${password}`);
+            
+            UserObject.firstName = firstName;
+            UserObject.lastName = lastName;
+            UserObject.userName = userName;
+            UserObject.emailAddress = emailAddress;
+            UserObject.password = password;
+            
+
+            console.log(UserObject);
 
 
             clearForm();
