@@ -1,3 +1,10 @@
+
+/***
+ * Student Name: Karandeep.
+ * Student ID: 100730021
+ * date : March  7 , 2020.
+ * 
+ */
 class contact
 {
     constructor(contactName="", emailAddress="", contactNumber="", contactMessage="")
@@ -281,6 +288,7 @@ let app;
 
             contactUsLIParent.insertBefore(userNameLI, logoutLI);
             $("#logout").show();
+           
 
         });
 
