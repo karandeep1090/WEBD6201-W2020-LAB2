@@ -27,6 +27,12 @@ let app;
      * Variable initialization in this function
      *
      */
+    let logoutLI;
+    let contactUsLI;
+    let logoutLIParent;
+    let contactUsLIParent;
+    let userNameLI;
+
     function Start()
     {
        PageSwitcher();
@@ -249,6 +255,19 @@ let app;
             e.stopPropagation();
             $("#loginForm")[0].reset();
             $("#login").hide();
+            // Part B
+            logoutLI = document.getElementById('logout');
+            contactUsLI = document.getElementById('contactUS');
+            logoutLIParent = logoutLI.parentNode;
+            contactUsLIParent = contactUsLI.parentNode;
+            userNameLI = contactUsLI.cloneNode(true);
+            userNameLI.id = "un";
+            //HRLI.firstElementChild.innerHTML = "<i class='fas fa-users'></i> Human Resources";
+
+            userNameLI.firstElementChild.firstElementChild.className = "fas fa-users";
+            userNameLI.firstElementChild.lastChild = $("#contactName").show();
+
+            contactUsLIParent.insertBefore(userNameLI, logoutLI);
             $("#logout").show();
 
         });
@@ -258,6 +277,110 @@ let app;
     function DisplayRegisterContent()
     {
         document.title = "WEBD6201 - Register";
+
+        function clearForm()
+        {
+            $("#registerForm")[0].reset();
+            $("#errorMessage").hide();
+        }
+
+        function validateInput(selector, condition, errorMessage)
+        {
+            if(condition)
+            {
+                $("#errorMessage").show();
+                $("#errorMessage").text(errorMessage);
+                $(selector).select();
+                $(selector).css("border", "2px solid red");
+            }
+            else
+            {
+                $("#errorMessage").hide();
+                $(selector).css("border", "1px solid #ced4da");
+            }
+        }
+
+
+        $("#errorMessage").hide();
+        $("#firstName").select();
+
+        // Register Name Validation Event
+        $("#firstName").blur((e)=>
+        {
+            validateInput("#firstName",($("#firstName").val().length < 2), "ERROR: First Name is too Short.Please try again.");
+
+        });
+
+        $("#firstName").focus((e)=>
+        {
+           $("#firstName").select();
+        });
+
+         
+         $("#lastName").blur((e)=>
+         {
+             validateInput("#lastName",($("#lastName").val().length < 2), "ERROR: last Name is too Short.Please try again.");
+ 
+         });
+ 
+         $("#lastName").focus((e)=>
+         {
+            $("#lastName").select();
+         });
+
+         
+         //  Register Email  validation Events
+        $("#emailAddress").blur((e)=>
+        {
+            validateInput("#emailAddress",($("#emailAddress").val().length < 8) || (!$("#emailAddress").val().includes("@")),"ERROR: Invalid Email Address.Please try again.");
+        });
+
+        $("#emailAddress").focus((e)=>
+        {
+            $("#emailAddress").select();
+        });
+
+
+        // Register  Password Validation Events
+        $("#password").blur((e)=>
+        {
+            validateInput("#password",($("#password").val().length < 6), "ERROR: Your entered password require minimum six characters.Please try again.");
+
+        });
+
+        $("#password").focus((e)=>
+        {
+           $("#password").select();
+        });
+
+
+        // got help from Ritu Patel for this event
+        //  Register ConfirmPassword Validation  Events
+        $("#confirmPassword").blur((e)=>
+        {
+            validateInput("#confirmPassword",($("#password").val()!=$("#confirmPassword").val()), "ERROR: your password and confirm pssword should be same.");
+
+        });
+
+        $("#confirmPassword").focus((e)=>
+        {
+           $("#confirmPassword").select();
+        });
+
+        $("#registerForm").submit((e)=>
+        {
+            if(document.getElementById("registerForm").checkValidity() == false)
+            {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log("form not valid");
+            }
+
+
+
+
+            clearForm();
+        });
     }
 
     /**
